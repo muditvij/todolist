@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #153677, #4e085f);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .todo {
+            width: 90%;
+            max-width: 540px;
+            background: #fff;
+            padding: 40px 30px 70px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .todo h2, p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #edeef0;
+            border-radius: 30px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            background: #ff5945;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e04e3f;
+        }
+        ul {
+            padding: 0;
+        }
+        ul li {
+            list-style: none;
+            font-size: 17px;
+            padding: 12px 8px 12px 40px;
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+            word-wrap: break-word;
+        }
+        ul li.checked {
+            color: #555;
+            text-decoration: line-through;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background-image: url('/unchecked.png');
+        }
+        ul li.checked::before {
+            background-image: url('/checked.jpg');
+        }
+        @media (max-width: 480px) {
+            .todo {
+                padding: 30px 20px;
+            }
+            .row {
+                flex-direction: column;
+                padding: 10px;
+            }
+            input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="todo">
+            <h2>To-do List</h2>
+            <p>Add your tasks now!</p>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Enter your task...">
+                <button onclick="addTask()">Add</button>
+            </div>
+            <ul id="list-container"></ul>
+            <p style="font-size: small;">&copy; MuditWebDev 2025</p>
+        </div>
+    </div>
+    <script>
+        function addTask() {
+            const inputBox = document.getElementById("input-box");
+            const listContainer = document.getElementById("list-container");
+            if (inputBox.value.trim() === "") {
+                alert("Write something...");
+                return;
+            }
+            let li = document.createElement("li");
+            li.textContent = inputBox.value;
+            li.addEventListener("click", function () {
+                this.classList.toggle("checked");
+            });
+            listContainer.appendChild(li);
+            inputBox.value = "";
+        }
+    </script>
+</body>
+</html>
